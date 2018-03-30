@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import ProductsContainer from './components/ProductsContainer'
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
         <div className="App-header">
           <h1>Products</h1>
         </div>
+        <ProductsConatiner/>
       </div>
     );
   }
