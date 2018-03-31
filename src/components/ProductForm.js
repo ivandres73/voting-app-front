@@ -6,7 +6,7 @@ class ProductForm extends Component {
 		super(props)
 		this.state = {
 			title: this.props.product.title,
-			body: this.props.product.body,
+			description: this.props.product.description,
 			votes: this.props.product.votes
 		}
 	}
@@ -20,11 +20,11 @@ class ProductForm extends Component {
 	handleBlur = () => {
 		const product = {
 			title: this.state.title,
-			body: this.state.body
+			description: this.state.description
 		}
 
 		axios.put(
-			`http://localhost:3001/products/${this.props.idea.id}`,
+			`http://localhost:3001/products/${this.props.product.id}`,
 			{product: product}
 		).then(response => {
 			console.log(response)
@@ -37,7 +37,7 @@ class ProductForm extends Component {
 			<div className="tile">
 				<form onBlur={this.handleBlur}>
 					<input className="input" type="text" name="title" placeholder="Product Name" value={this.state.title} onChange={this.handleInput} />
-					<textarea className="input" name="body" placeholder="Describe your product" value={this.state.body} onChange={this.handleInput} ></textarea>
+					<textarea className="input" name="description" placeholder="Describe your product" value={this.state.description} onChange={this.handleInput} ></textarea>
 				</form>
 			</div>
 		);

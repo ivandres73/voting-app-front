@@ -31,7 +31,7 @@ class ProductsContainer extends Component {
 			{ product:
 				{
 					title: '',
-					body: ''
+					product: ''
 				}
 			}
 		).then(response => {
@@ -41,7 +41,7 @@ class ProductsContainer extends Component {
 			})
 			this.setState({
 				products: products,
-				editingIdeaID: response.data.id
+				editingProductID: response.data.id
 			})
 		}).catch(error => console.log(error))
 	}
