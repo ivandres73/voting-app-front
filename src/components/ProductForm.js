@@ -17,10 +17,25 @@ class ProductForm extends Component {
 		})
 	}
 
+	handleBlur = () => {
+		const product = {
+			title: this.state.title,
+			body: this.state.body
+		}
+
+		axios.put(
+			`http://localhost:3001/products/${this.props.idea.id}`,
+			{product: product}
+		).then(response => {
+			console.log(response)
+			this.props.updateProduct(response.data);
+		}).catch(error => console.log(error))
+	}
+
 	render {
 		return (
 			<div className="tile">
-				<form>
+				<form onBlur={this.handleBlur}>
 					<input className="input" type="text" name="title" placeholder="Product Name" value={this.state.title} onChange={this.handleInput} />
 					<textarea className="input" name="body" placeholder="Describe your product" value={this.state.body} onChange={this.handleInput} ></textarea>
 				</form>

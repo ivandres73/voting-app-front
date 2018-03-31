@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import Product from './Product'
+import update from 'immutability-helper'
 import ProductForm from './ProductForm'
 
 class ProductsContainer extends Component {
@@ -66,4 +67,4 @@ class ProductsContainer extends Component {
 
 }
 
-export defualt ProductsContainer
+export default ProductsContainer

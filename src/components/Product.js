@@ -7,4 +7,4 @@ const Product = ({product}) =>
 		<p>{product.votes}</p>
 	</div>
 
-export defualt Product
+export default Product
