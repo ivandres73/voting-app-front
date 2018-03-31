@@ -32,7 +32,7 @@ class ProductForm extends Component {
 		}).catch(error => console.log(error))
 	}
 
-	render {
+	render() {
 		return (
 			<div className="tile">
 				<form onBlur={this.handleBlur}>

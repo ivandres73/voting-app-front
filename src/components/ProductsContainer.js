@@ -8,7 +8,7 @@ class ProductsContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			ideas: [],
+			products: [],
 			editingIdeaID: null
 		}
 	}
@@ -25,7 +25,7 @@ class ProductsContainer extends Component {
 	}
 
 	addNewProduct = () => {
-		console.log('Boton presiona do!')
+		console.log('Boton presionado!')
 		axios.post(
 			'http://localhost:3001/products',
 			{ product:
@@ -36,7 +36,7 @@ class ProductsContainer extends Component {
 			}
 		).then(response => {
 			console.log(response)
-			const ideas = update(this.state.product, {
+			const products = update(this.state.product, {
 				$splice: [[0, 0, response.data]]
 			})
 			this.setState({
@@ -46,7 +46,15 @@ class ProductsContainer extends Component {
 		}).catch(error => console.log(error))
 	}
 
-	render {
+	updateProduct = (product) => {
+		const productIndex = this.state.products.findIndex(x => x.id === product.id)
+		const products = update(this.state.products, {
+			[productIndex]: { $set: product }
+		})
+		this.setState({products: products})
+	}
+
+	render() {
 		return (
 			<div>
 				<div>
@@ -55,8 +63,8 @@ class ProductsContainer extends Component {
 					</button>
 				</div>
 				{this.state.products.map((product) => {
-					if(this.state.editingIdeaID == product.id) {
-						return(<ProductForm product={product} key={product.id}/>)
+					if(this.state.editingProductID == product.id) {
+						return(<ProductForm product={product} key={product.id} updateProduct={this.updateProduct}/>)
 					} else {
 						return(<Product product={product} key={product.id} />)
 					}
