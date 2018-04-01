@@ -3,6 +3,7 @@ import axios from 'axios'
 import Product from './Product'
 import update from 'immutability-helper'
 import ProductForm from './ProductForm'
+import '../semantic-dist/semantic.css'
 
 class ProductsContainer extends Component {
 	constructor(props) {
@@ -58,17 +59,19 @@ class ProductsContainer extends Component {
 		return (
 			<div>
 				<div>
-					<button className="newProductButton" onClick={this.addNewProduct}>
+					<button className="ui button" onClick={this.addNewProduct}>
 						New Product
 					</button>
 				</div>
-				{this.state.products.map((product) => {
-					if(this.state.editingProductID == product.id) {
-						return(<ProductForm product={product} key={product.id} updateProduct={this.updateProduct}/>)
-					} else {
-						return(<Product product={product} key={product.id} />)
-					}
-				})}
+				<div className='ui unstackable items'>
+					{this.state.products.map((product) => {
+						if(this.state.editingProductID == product.id) {
+							return(<ProductForm product={product} key={product.id} updateProduct={this.updateProduct}/>)
+						} else {
+							return(<Product product={product} key={product.id} />)
+						}
+					})}
+				</div>
 			</div>
 		);
 	}

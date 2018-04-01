@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import '../semantic-dist/semantic.css'
 
 class ProductForm extends Component {
 	constructor(props) {
@@ -34,7 +35,7 @@ class ProductForm extends Component {
 
 	render() {
 		return (
-			<div className="tile">
+			<div className='item'>
 				<form onBlur={this.handleBlur}>
 					<input className="input" type="text" name="title" placeholder="Product Name" value={this.state.title} onChange={this.handleInput} />
 					<textarea className="input" name="description" placeholder="Describe your product" value={this.state.description} onChange={this.handleInput} ></textarea>
