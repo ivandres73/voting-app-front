@@ -17,7 +17,7 @@ class ProductsContainer extends Component{
 	}
 
 	componentDidMount(){
-		axios.get('http://localhost:3001/products.json').then(
+		axios.get('https://votingapp-backend.herokuapp.com/products.json').then(
 			response => {
 				console.log(response)
 				this.setState({products: response.data})
@@ -43,7 +43,7 @@ class ProductsContainer extends Component{
 
 	addNewProduct = () => {
 		axios.post(
-			`http://localhost:3001/products/`,
+			`https://votingapp-backend.herokuapp.com/products/`,
 			{ product:
 				{
 					title: '',
@@ -53,7 +53,7 @@ class ProductsContainer extends Component{
 				}
 			}
 		).then(response => {
-			//agregar las nuevas ideas sin tener que refresh manualmente 
+			
 			console.log(response)
 			const products = update(this.state.products, {
 				$splice: [[0,0,response.data]]
@@ -72,7 +72,7 @@ class ProductsContainer extends Component{
 		const products = update(this.state.products,{
 			[productIndex]: { $set: product }
 		})
-		this.setState({products: products, notification: 'Saved'})
+		this.setState({products: products})
 	}
 
 	reset = () => {
@@ -85,7 +85,7 @@ class ProductsContainer extends Component{
 
 	delete = (id) => {
 		axios.delete(
-			`http://localhost:3001/products/${id}`
+			`https://votingapp-backend.herokuapp.com/products/${id}`
 		).then(response => {
 			const productIndex = this.state.products.findIndex(x => x.id === id)
 			const products = update(this.state.products, {
@@ -106,31 +106,31 @@ class ProductsContainer extends Component{
         <Product
           key={'product-' + product.id}
           id={product.id}
-          title={product.title}
+		  title={product.title}
           description={product.description}
           url={product.url}
           votes={product.votes}
           submitterAvatarUrl={product.submitterAvatarUrl}
           productImageUrl={product.productImageUrl}
-					onVote={this.handleProductUpVote}
-					onClick={this.enableEditing}
-					onDelete={this.delete}
+		  onClick={this.enableEditing}
+		  onDelete={this.delete}
+		  onVote={this.handleProductUpVote}
         />
     ));
     return (
-      <div className='ui unstackable items'>
-				{productComponents}
-					<button className="newProductButton" onClick={this.addNewProduct}>
-						New Product
-					</button>
-					<span className="notified">{this.state.notification}</span>
-						{this.state.products.map((product) => {
-							if(this.state.editingProductId === product.id){
-								return(<ProductForm product={product} key={product.id} updateProduct={this.updateProduct}
-								reset={this.reset}/>)
-							} 
-						})}
-      </div>
+		<div className='ui unstackable items'>
+			<button className="newProductButton" onClick={this.addNewProduct}>
+				New Product
+			</button>
+			{productComponents}
+				<span className="notified">{this.state.notification}</span>
+					{this.state.products.map((product) => {
+						if(this.state.editingProductId === product.id){
+							return(<ProductForm product={product} key={product.id} updateProduct={this.updateProduct}
+							reset={this.reset}/>)
+						} 
+					})}
+     	</div>
     );
   }
 }

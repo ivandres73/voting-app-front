@@ -32,7 +32,7 @@ class ProductForm extends Component{
             productImageUrl: this.state.productImageUrl
         }
         axios.put(
-            `http://localhost:3001/products/${this.props.product.id}`,
+            `https://votingapp-backend.herokuapp.com/products/${this.props.product.id}`,
             {
                 product: product
             }
