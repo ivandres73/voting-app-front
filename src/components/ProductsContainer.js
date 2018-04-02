@@ -43,7 +43,7 @@ class ProductsContainer extends Component{
 
 	addNewProduct = () => {
 		axios.post(
-			`https://votingapp-backend.herokuapp.com/products/`,
+			`https://votingapp-backend.herokuapp.com/products`,
 			{ product:
 				{
 					title: '',
